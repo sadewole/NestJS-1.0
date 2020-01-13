@@ -4,13 +4,13 @@ import { UserService } from './user.service';
 import { DatabaseModule } from 'src/database/database.module';
 import { userProvider } from './user.provider';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from 'src/auth/constant';
+import 'dotenv/config';
 
 @Module({
   imports: [
     DatabaseModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: process.env.jwtSecret,
       signOptions: { expiresIn: '3600s' }
     })
   ],

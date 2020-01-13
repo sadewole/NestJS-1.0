@@ -18,7 +18,7 @@ export class UserService {
   async createUser(user: object): Promise<any> {
     const newUser = new this.userModel(user);
     const data = await newUser.save();
-    const payload = { sub: data.id };
+    const payload = { sub: data._id };
 
     return {
       msg: 'Register successful',
@@ -30,6 +30,10 @@ export class UserService {
 
   async findOne(email: string): Promise<User> {
     return await this.userModel.findOne({ email });
+  }
+
+  async findById(id: string): Promise<User> {
+    return await this.userModel.findById({ _id: id });
   }
 
   async deleteUser(id: string): Promise<any> {

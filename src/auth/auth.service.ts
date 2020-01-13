@@ -12,11 +12,16 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userService.findOne(email);
-    if(!user) throw new UnauthorizedException()
-    
+    if (!user) throw new UnauthorizedException();
+
     const compare = await this.comparePassword(user.password, password);
     if (user && compare) {
-      const { password, ...result } = user;
+      const { name, email, id } = user;
+      const result = {
+        name,
+        email,
+        id
+      };
       return result;
     }
     return null;
@@ -24,6 +29,7 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { sub: user.id };
+
     return {
       message: 'Login successful',
       success: true,

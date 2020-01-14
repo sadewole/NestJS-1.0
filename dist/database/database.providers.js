@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 exports.databaseProviders = [
     {
         provide: 'DATABASE_CONNECTION',
-        useFactory: () => mongoose.connect(process.env.MongoURI, {
+        useFactory: () => mongoose.connect('mongodb+srv://sam-nest:nest@cluster0-2smzw.mongodb.net/test?retryWrites=true&w=majority', {
             useNewUrlParser: true,
             useFindAndModify: false,
             useCreateIndex: true,
